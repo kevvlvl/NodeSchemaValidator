@@ -32,7 +32,7 @@ const validateMinimumNumber: KeywordDefinition = {
 
         if(!isValid) {
             (v as SchemaValidateFunction).errors = [{
-                keyword: "validateMinimum",
+                keyword: 'validateMinimum',
                 instancePath: dataCxt?.instancePath,
                 message: `${ERROR_VALIDATE_MINIMUM} Value ${data} is below ${minLimit}`,
                 params: {
@@ -63,7 +63,7 @@ const validateMaximumNumber: KeywordDefinition = {
 
         if(!isValid) {
             (v as SchemaValidateFunction).errors = [{
-                keyword: "validateMaximum",
+                keyword: 'validateMaximum',
                 instancePath: dataCxt?.instancePath,
                 message: `${ERROR_VALIDATE_MAXIMUM} Value ${data} is above ${maxLimit}`,
                 params: {
