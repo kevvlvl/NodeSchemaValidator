@@ -25,7 +25,10 @@ describe('Ajv validation', () => {
     it('returns a custom schema error if value is below the minimum', () => {
 
         validator = ajv.compile(schemaWithErrors);
-        const valid = validator({ amount: 50 });
+        const valid = validator({
+            amount: 50,
+            actionedOn: '2025-07-01',
+        });
 
         expect(valid)
             .toBe(false);
@@ -57,12 +60,43 @@ describe('Ajv validation', () => {
     it('returns a custom schema error if value is above the maximum', () => {
 
         validator = ajv.compile(schemaWithErrors);
-        const valid = validator({ amount: 20000 });
+        const valid = validator({
+            amount: 20000,
+            actionedOn: '2025-07-01',
+        });
 
         expect(valid)
             .toBe(false);
         expect(validator.errors?.[0].message)
             .toBe('amount must be below or equals 1000');
+    });
+
+    it('returns a ajv-formats error when date is below formatMinimum', () => {
+
+        validator = ajv.compile(schemaWithErrors);
+        const valid = validator({
+            amount: 750,
+            actionedOn: '2025-01-01',
+        });
+
+        expect(valid)
+            .toBe(false);
+        expect(validator.errors?.[0].message)
+            .toBe('should be >= 2025-05-01');
+    });
+
+    it('returns a ajv-formats error when date is above formatMaximum', () => {
+
+        validator = ajv.compile(schemaWithErrors);
+        const valid = validator({
+            amount: 750,
+            actionedOn: '2025-09-02',
+        });
+
+        expect(valid)
+            .toBe(false);
+        expect(validator.errors?.[0].message)
+            .toBe('should beq <= 2025-09-01');
     });
 
     it('returns a keyword error if value is above the maximum', () => {

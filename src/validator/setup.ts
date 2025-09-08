@@ -1,4 +1,5 @@
 import Ajv, {KeywordDefinition, SchemaValidateFunction} from "ajv";
+import addFormats from 'ajv-formats';
 import {AnySchemaObject, DataValidationCxt} from "ajv/lib/types";
 import {ERROR_VALIDATE_MAXIMUM, ERROR_VALIDATE_MINIMUM} from "./types";
 
@@ -8,7 +9,16 @@ export function initAjv(): Ajv {
         allErrors: true,
         $data: true,
     });
-    require('ajv-errors')(ajv);
+
+    const ajvFormats = require('ajv-formats');
+    const ajvErrors = require('ajv-errors');
+
+    ajvErrors(ajv);
+    ajvFormats(ajv, {
+        formats: ['date', 'time'],
+        keywords: true,
+        mode: 'fast',
+    });
 
     ajv.addKeyword(validateMinimumNumber);
     ajv.addKeyword(validateMaximumNumber);

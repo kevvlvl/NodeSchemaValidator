@@ -18,7 +18,7 @@ export const schemaWithErrors = {
     type: 'object',
     properties: {
         amount: {
-            type: 'number',
+            type: 'integer',
             validateMinimum: true,
             validateMaximum: true,
             errorMessage: {
@@ -26,6 +26,12 @@ export const schemaWithErrors = {
                 validateMaximum: 'amount must be below or equals 1000',
             },
         },
+        actionedOn: {
+            type: 'string',
+            format: 'date',
+            formatMinimum: '2025-05-01',
+            formatMaximum: '2025-09-01',
+        },
     },
-    required: ['amount'],
+    required: ['amount', 'actionedOn'],
 };
