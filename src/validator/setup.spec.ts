@@ -82,7 +82,7 @@ describe('Ajv validation', () => {
         expect(valid)
             .toBe(false);
         expect(validator.errors?.[0].message)
-            .toBe('should be >= 2025-05-01');
+            .toBe('date must be at least from May 1, 2025');
     });
 
     it('returns a ajv-formats error when date is above formatMaximum', () => {
@@ -96,7 +96,7 @@ describe('Ajv validation', () => {
         expect(valid)
             .toBe(false);
         expect(validator.errors?.[0].message)
-            .toBe('should be <= 2025-09-01');
+            .toBe('date must be up to September 1, 2025');
     });
 
     it('returns a keyword error if value is above the maximum', () => {

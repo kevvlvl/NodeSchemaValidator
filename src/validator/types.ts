@@ -31,6 +31,10 @@ export const schemaWithErrors = {
             format: 'date',
             formatMinimum: '2025-05-01',
             formatMaximum: '2025-09-01',
+            errorMessage: {
+                formatMinimum: 'date must be at least from May 1, 2025',
+                formatMaximum: 'date must be up to September 1, 2025',
+            }
         },
     },
     required: ['amount', 'actionedOn'],
