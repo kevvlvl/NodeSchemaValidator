@@ -96,7 +96,7 @@ describe('Ajv validation', () => {
         expect(valid)
             .toBe(false);
         expect(validator.errors?.[0].message)
-            .toBe('should beq <= 2025-09-01');
+            .toBe('should be <= 2025-09-01');
     });
 
     it('returns a keyword error if value is above the maximum', () => {

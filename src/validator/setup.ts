@@ -1,5 +1,4 @@
 import Ajv, {KeywordDefinition, SchemaValidateFunction} from "ajv";
-import addFormats from 'ajv-formats';
 import {AnySchemaObject, DataValidationCxt} from "ajv/lib/types";
 import {ERROR_VALIDATE_MAXIMUM, ERROR_VALIDATE_MINIMUM} from "./types";
 
