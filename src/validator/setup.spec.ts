@@ -1,6 +1,6 @@
 import {initAjv} from './setup';
 import Ajv, {ValidateFunction} from 'ajv';
-import {schema, schemaWithErrors} from './types';
+import {schema, schemaWithConditions, schemaWithErrors} from './types';
 
 describe('Ajv validation', () => {
 
@@ -117,5 +117,37 @@ describe('Ajv validation', () => {
             .toBe('errorMessage')
         expect(validator.errors && validator.errors[0].params.max)
             .toBeDefined();
+    });
+
+    it('returns an error if the set value does not match the mode', () => {
+
+        validator = ajv.compile(schemaWithConditions);
+
+        const valid = validator({ mode: 'small', amount: 1000 });
+
+        expect(valid)
+            .toBe(false);
+        expect(validator.errors?.length)
+            .toBe(2)
+        expect(validator.errors && validator.errors[0].keyword)
+            .toBe('errorMessage')
+        expect(validator.errors && validator.errors[0].message)
+            .toStrictEqual('The integer value must be between 0 and 25')
+        expect(validator.errors && validator.errors[1].keyword)
+            .toBe('if')
+        expect(validator.errors && validator.errors[1].message)
+            .toStrictEqual('must match "then" schema')
+    });
+
+    it('returns an error if the set value does not match the mode', () => {
+
+        validator = ajv.compile(schemaWithConditions);
+
+        const valid = validator({ mode: 'large', amount: 1000 });
+
+        expect(valid)
+            .toBe(true);
+        expect(validator.errors)
+            .toBeNull();
     });
 });

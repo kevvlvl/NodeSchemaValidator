@@ -39,3 +39,43 @@ export const schemaWithErrors = {
     },
     required: ['amount', 'actionedOn'],
 };
+
+export const schemaWithConditions = {
+    type: 'object',
+    properties: {
+        mode: {
+            type: 'string',
+        },
+        amount: {
+            type: 'integer',
+        }
+    },
+    required: ['mode', 'amount'],
+    if: {
+        properties: {
+            mode: {
+                const: 'small',
+            }
+        }
+    },
+    then: {
+        properties: {
+            amount: {
+                type: 'integer',
+                minimum: 0,
+                maximum: 25,
+                errorMessage: 'The integer value must be between 0 and 25',
+            }
+        }
+    },
+    else: {
+        properties: {
+            amount: {
+                type: 'integer',
+                minimum: 1000,
+                maximum: 2500,
+                errorMessage: 'The integer value must be between 1000 and 2500',
+            }
+        }
+    }
+}

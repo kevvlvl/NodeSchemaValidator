@@ -25,6 +25,10 @@ export function initAjv(): Ajv {
     return ajv;
 }
 
+/**
+ * @function validateMinimumNumber is in theory not necessary (same as minimum)
+ * This is just to showcase custom keyword implementation with custom error handling
+ */
 const validateMinimumNumber: KeywordDefinition = {
     keyword: 'validateMinimum',
     type: 'number',
@@ -56,6 +60,10 @@ const validateMinimumNumber: KeywordDefinition = {
     }
 }
 
+/**
+ * @function validateMaximumNumber is in theory not necessary (same as maximum)
+ * This is just to showcase custom keyword implementation with custom error handling
+ */
 const validateMaximumNumber: KeywordDefinition = {
     keyword: 'validateMaximum',
     type: 'number',
